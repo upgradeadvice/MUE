@@ -1,4 +1,4 @@
-Monetaryunit 1.0.0 [MUE]
+Monetaryunit 1.0 [MUE]
 ====================
 
 Copyright (c) 2009-2013 Bitcoin Developers
@@ -29,6 +29,6 @@ Default/Testnet RPC Port: 29947 / 39947
 
 Merkel Root: a2cc3c1d8ab6e50e80464693199eefdd172d45c4129998394e636e47b5621364
 
-Public Key: 50 (M)
+Public Key: 3 (7)
 
 %appdata%\monetaryunit\monetaryunit.conf
