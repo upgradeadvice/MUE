@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2013 The Sifcoin developers
-// Copyright (c) 2013-2014 The Quarkcoin developers
+// Copyright (c) 2013-2014 The MonetaryUnit developers
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -29,7 +29,7 @@ using namespace std;
 using namespace boost;
 
 #if defined(NDEBUG)
-# error "Quark cannot be compiled without assertions."
+# error "MonetaryUnit cannot be compiled without assertions."
 #endif
 
 //
@@ -72,7 +72,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Quarkcoin Signed Message:\n";
+const string strMessageMagic = "MonetaryUnit Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -1183,31 +1183,28 @@ void static PruneOrphanBlocks()
 }
 
 static const int64_t nGenesisBlockRewardCoin = 1 * COIN;
-static const int64_t nBlockRewardStartCoin = 2048 * COIN;
+static const int64_t nBlockRewardStartCoin = 40 * COIN;
 static const int64_t nBlockRewardMinimumCoin = 1 * COIN;
 
-static const int64_t nTargetTimespan = 10 * 60; // 10 minutes
-static const int64_t nTargetSpacing = 30; // 30 seconds
-static const int64_t nInterval = nTargetTimespan / nTargetSpacing; // 20 blocks
+static const int64_t nTargetTimespan = 10 * 40;
+static const int64_t nTargetSpacing = 40; // 40 seconds
+static const int64_t nInterval = nTargetTimespan / nTargetSpacing; // 10 blocks
 
 int64_t GetBlockValue(int nHeight, int64_t nFees)
 {
-    if (nHeight == 0)
-    {
-        return nGenesisBlockRewardCoin;
-    }
-    
     int64_t nSubsidy = nBlockRewardStartCoin;
 
-    // Subsidy is cut in half every 60480 blocks (21 days)
-    nSubsidy >>= min((nHeight / 60480), 63);
+    if(nHeight == 1 ) {nSubsidy = 40000000 * COIN;}
+    else if(nHeight <= 40000 ) {nSubsidy = .025 * COIN;}
+    else if(nHeight <= 80000 ) {nSubsidy = 1 * COIN;}
+    else if(nHeight <= 120000 ) {nSubsidy = 2 * COIN;}
+    else if(nHeight <= 160000 ) {nSubsidy = 4 * COIN;}
+    else if(nHeight <= 200000 ) {nSubsidy = 8 * COIN;}
+    else if(nHeight <= 240000 ) {nSubsidy = 10 * COIN;}
+    else if(nHeight <= 280000 ) {nSubsidy = 20 * COIN;}
+    else if(nHeight <= 320000 ) {nSubsidy = 30 * COIN;}
+    else if(nHeight >= 320001 ) {nSubsidy = 40 * COIN;}
     
-    // Minimum subsidy
-    if (nSubsidy < nBlockRewardMinimumCoin)
-    {
-        nSubsidy = nBlockRewardMinimumCoin;
-    }
-
     return nSubsidy + nFees;
 }
 
@@ -1330,7 +1327,7 @@ bool IsInitialBlockDownload()
         nLastUpdate = GetTime();
     }
     return (GetTime() - nLastUpdate < 10 &&
-            chainActive.Tip()->GetBlockTime() < GetTime() - 24 * 60 * 60);
+            chainActive.Tip()->GetBlockTime() < GetTime() - 90 * 60 * 60);
 }
 
 bool fLargeWorkForkFound = false;

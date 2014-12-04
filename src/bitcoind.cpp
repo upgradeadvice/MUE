@@ -86,13 +86,13 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to bitcoind / RPC client
-            std::string strUsage = _("Quark Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("MonetaryUnit Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  quarkd [options]                     " + _("Start Quark Core Daemon") + "\n" +
-                _("Usage (deprecated, use quark-cli):") + "\n" +
-                  "  quarkd [options] <command> [params]  " + _("Send command to Quark Core") + "\n" +
-                  "  quarkd [options] help                " + _("List commands") + "\n" +
-                  "  quarkd [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  monetaryunitd [options]                     " + _("Start MonetaryUnit Core Daemon") + "\n" +
+                _("Usage (deprecated, use monetaryunit-cli):") + "\n" +
+                  "  monetaryunitd [options] <command> [params]  " + _("Send command to MonetaryUnit Core") + "\n" +
+                  "  monetaryunitd [options] help                " + _("List commands") + "\n" +
+                  "  monetaryunitd [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
             strUsage += "\n" + HelpMessageCli(false);
@@ -104,7 +104,7 @@ bool AppInit(int argc, char* argv[])
         // Command-line RPC
         bool fCommandLine = false;
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "quark:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "monetaryunit:"))
                 fCommandLine = true;
 
         if (fCommandLine)
@@ -116,7 +116,7 @@ bool AppInit(int argc, char* argv[])
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon)
         {
-            fprintf(stdout, "Quark server starting\n");
+            fprintf(stdout, "MonetaryUnit server starting\n");
 
             // Daemonize
             pid_t pid = fork();

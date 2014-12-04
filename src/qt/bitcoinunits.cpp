@@ -38,9 +38,9 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("QRK");
-    case cBTC: return QString("cQRK");
-    case mBTC: return QString::fromUtf8("mQRK");
+    case BTC: return QString("MUE");
+    case cBTC: return QString("cMUE");
+    case mBTC: return QString::fromUtf8("mMUE");
     default: return QString("???");
     }
 }
@@ -49,9 +49,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Quarks");
-    case cBTC: return QString("Centum-Quarks (1 / 100)");
-    case mBTC: return QString("Milli-Quarks (1 / 1,000)");
+    case BTC: return QString("MonetaryUnits");
+    case cBTC: return QString("Centum-MonetaryUnits (1 / 100)");
+    case mBTC: return QString("Milli-MonetaryUnits (1 / 1,000)");
     default: return QString("???");
     }
 }

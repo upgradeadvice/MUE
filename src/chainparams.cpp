@@ -24,12 +24,12 @@ unsigned int pnSeed[] =
     0x01020304, 
 };
 
-static const unsigned int timeMainGenesisBlock = 1374408079;
-uint256 hashMainGenesisBlock("0x00000c257b93a36e9a4318a64398d661866341331a984e2b486414fc5bb16ccd");
+//static const unsigned int timeMainGenesisBlock = 1404668200;
+//uint256 hashMainGenesisBlock("0x0000070e6b650e7a6f20e015031b74c1f7e2b25ed4e419d8825ab9cc7eccfa92");
 static CBigNum bnMainProofOfWorkLimit(~uint256(0) >> 20);
 
 static const int64_t nGenesisBlockRewardCoin = 1 * COIN;
-static const int64_t nBlockRewardStartCoin = 2048 * COIN;
+static const int64_t nBlockRewardStartCoin = 40 * COIN;
 static const int64_t nBlockRewardMinimumCoin = 1 * COIN;
 
 class CMainParams : public CChainParams {
@@ -38,73 +38,49 @@ public:
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
-        pchMessageStart[0] = 0xfe;
-        pchMessageStart[1] = 0xa5;
-        pchMessageStart[2] = 0x03;
-        pchMessageStart[3] = 0xdd;
+        pchMessageStart[0] = 0x04;
+        pchMessageStart[1] = 0x05;
+        pchMessageStart[2] = 0x05;
+        pchMessageStart[3] = 0x04;
         vAlertPubKey = ParseHex("0493e6dc310a0e444cfb20f3234a238f77699806d47909a42481010c5ce68ff04d3babc959cd037bd3aa6ded929f2b9b4aa2f626786cd7f8495e5bb61e9cfebbc4");
         nDefaultPort = 11973;
         nRPCPort = 8372;
         bnProofOfWorkLimit = bnMainProofOfWorkLimit;
-        nSubsidyHalvingInterval = 60480;
+        nSubsidyHalvingInterval = 0;
 
         // Build the genesis block. Note that the output of the genesis coinbase cannot
         // be spent as it did not originally exist in the database.
-        const char* pszTimestamp = "21 July 2013, The Guardian, Tesco boss says cheap food era is over";
+        const char* pszTimestamp = "M O N E T A R Y U N I T";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = nGenesisBlockRewardCoin;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 112;
-        genesis.nTime    = timeMainGenesisBlock;
+        genesis.nTime    = 1404668200;
         genesis.nBits    = bnMainProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 12058113;
+        genesis.nNonce   = 139785;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == hashMainGenesisBlock);
-        assert(genesis.hashMerkleRoot == uint256("0x868b2fb28cb1a0b881480cc85eb207e29e6ae75cdd6d26688ed34c2d2d23c776"));
+        assert(hashGenesisBlock == uint256("0x0000070e6b650e7a6f20e015031b74c1f7e2b25ed4e419d8825ab9cc7eccfa92"));
+        assert(genesis.hashMerkleRoot == uint256("0xa2cc3c1d8ab6e50e80464693199eefdd172d45c4129998394e636e47b5621364"));
 
-        vSeeds.push_back(CDNSSeedData("seed1.quarkfoundation.cc", "seed1.quarkfoundation.cc"));
-        vSeeds.push_back(CDNSSeedData("seed2.quarkfoundation.cc", "seed2.quarkfoundation.cc"));
-        vSeeds.push_back(CDNSSeedData("seed3.quarkfoundation.cc", "seed3.quarkfoundation.cc"));
-        vSeeds.push_back(CDNSSeedData("seed4.quarkfoundation.cc", "seed4.quarkfoundation.cc"));
-        vSeeds.push_back(CDNSSeedData("seed5.quarkfoundation.cc", "seed5.quarkfoundation.cc"));
-        vSeeds.push_back(CDNSSeedData("seed6.quarkfoundation.cc", "seed6.quarkfoundation.cc"));
-        vSeeds.push_back(CDNSSeedData("seed7.quarkfoundation.cc", "seed7.quarkfoundation.cc"));
-        vSeeds.push_back(CDNSSeedData("seed8.quarkfoundation.cc", "seed8.quarkfoundation.cc"));
-        vSeeds.push_back(CDNSSeedData("seed1.qrk.cc", "seed1.qrk.cc"));
-        vSeeds.push_back(CDNSSeedData("seed2.qrk.cc", "seed2.qrk.cc"));
-        vSeeds.push_back(CDNSSeedData("seed3.qrk.cc", "seed3.qrk.cc"));
-        vSeeds.push_back(CDNSSeedData("seed4.qrk.cc", "seed4.qrk.cc"));
-        vSeeds.push_back(CDNSSeedData("seed5.qrk.cc", "seed5.qrk.cc"));
-        vSeeds.push_back(CDNSSeedData("seed6.qrk.cc", "seed6.qrk.cc"));
-        vSeeds.push_back(CDNSSeedData("seed1.qrkcoin.org", "seed1.qrkcoin.org"));
-        vSeeds.push_back(CDNSSeedData("seed2.qrkcoin.org", "seed2.qrkcoin.org"));
-        vSeeds.push_back(CDNSSeedData("seed3.qrkcoin.org", "seed3.qrkcoin.org"));
-        vSeeds.push_back(CDNSSeedData("seed4.qrkcoin.org", "seed4.qrkcoin.org"));
-        vSeeds.push_back(CDNSSeedData("seed5.qrkcoin.org", "seed5.qrkcoin.org"));
-        vSeeds.push_back(CDNSSeedData("seed6.qrkcoin.org", "seed6.qrkcoin.org"));
-        vSeeds.push_back(CDNSSeedData("seed1.quarkinvest.info", "seed1.quarkinvest.info"));
-        vSeeds.push_back(CDNSSeedData("seed2.quarkinvest.info", "seed2.quarkinvest.info"));
-        vSeeds.push_back(CDNSSeedData("seed3.quarkinvest.info", "seed3.quarkinvest.info"));
-        vSeeds.push_back(CDNSSeedData("seed4.quarkinvest.info", "seed4.quarkinvest.info"));
-        vSeeds.push_back(CDNSSeedData("seed5.quarkinvest.info", "seed5.quarkinvest.info"));
-        vSeeds.push_back(CDNSSeedData("seed6.quarkinvest.info", "seed6.quarkinvest.info"));
-        vSeeds.push_back(CDNSSeedData("quarkcoin.no-ip.biz", "quarkcoin.no-ip.biz"));
-        vSeeds.push_back(CDNSSeedData("quarkcoin.mooo.com", "quarkcoin.mooo.com"));
-        vSeeds.push_back(CDNSSeedData("qrk.ignorelist.com", "qrk.ignorelist.com"));
-        vSeeds.push_back(CDNSSeedData("qrk.redirectme.net", "qrk.redirectme.net"));
-        vSeeds.push_back(CDNSSeedData("qrk.no-ip.biz", "qrk.no-ip.biz"));
-		
+        vSeeds.push_back(CDNSSeedData("104.131.125.97", "104.131.125.97"));
+        vSeeds.push_back(CDNSSeedData("103.19.252.82", "103.19.252.82"));
+        vSeeds.push_back(CDNSSeedData("178.62.247.76", "178.62.247.76"));
+        vSeeds.push_back(CDNSSeedData("104.131.66.88", "104.131.66.88"));
+        vSeeds.push_back(CDNSSeedData("seed1.coinlab.info", "seed1.coinworks.info"));
+        vSeeds.push_back(CDNSSeedData("seed3.coinlab.info", "seed3.coinworks.info"));
+        vSeeds.push_back(CDNSSeedData("mueseed.coinlab.info", "mueseed.coinworks.info"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = list_of(58);
+
+        base58Prefixes[PUBKEY_ADDRESS] = list_of(15);
         base58Prefixes[SCRIPT_ADDRESS] = list_of(9);
-        base58Prefixes[SECRET_KEY] =     list_of(186);
+        base58Prefixes[SECRET_KEY] =     list_of(143);
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x88)(0xB2)(0x1E);
         base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x88)(0xAD)(0xE4);
 
@@ -147,19 +123,19 @@ public:
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
         pchMessageStart[0] = 0x01;
-        pchMessageStart[1] = 0x1a;
+        pchMessageStart[1] = 0x1A;
         pchMessageStart[2] = 0x39;
-        pchMessageStart[3] = 0xf7;
+        pchMessageStart[3] = 0xF7;
         vAlertPubKey = ParseHex("04218bc3f08237baa077cb1b0e5a81695fcf3f5b4e220b4ad274d05a31d762dd4e191efa7b736a24a32d6fd9ac1b5ebb2787c70e9dfad0016a8b32f7bd2520dbd5");
-        nDefaultPort = 21973;
-        nRPCPort = 18372;
+        nDefaultPort = 39948;
+        nRPCPort = 39947;
         strDataDir = "testnet3";
 
         // Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1373481000;
+        genesis.nTime = 1417683047;
         genesis.nNonce = 905523645;
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x00000e5e37c42d6b67d0934399adfb0fa48b59138abb1a8842c88f4ca3d4ec96"));
+        assert(hashGenesisBlock == uint256("0x0"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -193,7 +169,7 @@ public:
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 18444;
         strDataDir = "regtest";
-        assert(hashGenesisBlock == uint256("0x9cc7038a62931521a044f22acd7d9cf3e6f1f35d4e877ffe106b39e946f8000e"));
+        assert(hashGenesisBlock == uint256("0x0"));
 
         vSeeds.clear();  // Regtest mode doesn't have any DNS seeds.
     }

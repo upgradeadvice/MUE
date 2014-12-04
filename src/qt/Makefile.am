@@ -5,12 +5,12 @@ AM_CPPFLAGS += -I$(top_srcdir)/src \
   -I$(top_builddir)/src/qt/forms \
   $(PROTOBUF_CFLAGS) \
   $(QR_CFLAGS)
-bin_PROGRAMS = quark-qt
+bin_PROGRAMS = monetaryunit-qt
 noinst_LIBRARIES = libbitcoinqt.a
 SUBDIRS = . $(BUILD_TEST_QT)
 DIST_SUBDIRS = . test
 
-# quark qt core #
+# monetaryunit qt core #
 QT_TS = \
   locale/bitcoin_ach.ts \
   locale/bitcoin_af_ZA.ts \
@@ -336,23 +336,23 @@ BUILT_SOURCES = $(nodist_libbitcoinqt_a_SOURCES)
 $(QT_MOC): $(PROTOBUF_H)
 $(QT_MOC_CPP): $(PROTOBUF_H)
 
-# quark-qt binary #
-quark_qt_CPPFLAGS = $(AM_CPPFLAGS) $(QT_INCLUDES) \
+# monetaryunit-qt binary #
+monetaryunit_qt_CPPFLAGS = $(AM_CPPFLAGS) $(QT_INCLUDES) \
   -I$(top_srcdir)/src/qt/forms
-quark_qt_SOURCES = bitcoin.cpp
+monetaryunit_qt_SOURCES = bitcoin.cpp
 if TARGET_DARWIN
-  quark_qt_SOURCES += $(BITCOIN_MM)
+  monetaryunit_qt_SOURCES += $(BITCOIN_MM)
 endif
 if TARGET_WINDOWS
-  quark_qt_SOURCES += $(BITCOIN_RC)
+  monetaryunit_qt_SOURCES += $(BITCOIN_RC)
 endif
-quark_qt_LDADD = libbitcoinqt.a $(LIBBITCOIN_SERVER)
+monetaryunit_qt_LDADD = libbitcoinqt.a $(LIBBITCOIN_SERVER)
 if ENABLE_WALLET
-quark_qt_LDADD += $(LIBBITCOIN_WALLET)
+monetaryunit_qt_LDADD += $(LIBBITCOIN_WALLET)
 endif
-quark_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBLEVELDB) $(LIBMEMENV) \
+monetaryunit_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBLEVELDB) $(LIBMEMENV) \
   $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS)
-quark_qt_LDFLAGS = $(QT_LDFLAGS)
+monetaryunit_qt_LDFLAGS = $(QT_LDFLAGS)
 
 # forms/foo.h -> forms/ui_foo.h
 QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
