@@ -28,7 +28,7 @@ const unsigned int dump_addresses_interval = 900;
 using namespace std;
 using namespace boost;
 
-static const int MAX_OUTBOUND_CONNECTIONS = 24;
+static const int MAX_OUTBOUND_CONNECTIONS = 9;
 
 bool OpenNetworkConnection(const CAddress& addrConnect, CSemaphoreGrant *grantOutbound = NULL, const char *strDest = NULL, bool fOneShot = false);
 
@@ -1192,6 +1192,10 @@ void MapPort(bool)
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
+	{"104.131.125.97", "104.131.125.97"},
+	{"103.19.252.82", "103.19.252.82"},
+	{"178.62.247.76", "178.62.247.76"},
+	{"104.131.66.88", "104.131.66.88"},
     {"seed1.coinlab.info", "seed1.coinworks.info"},
     {"seed3.coinlab.info", "seed3.coinworks.info"},
     {"mueseed.coinlab.info", "mueseed.coinworks.info"},
