@@ -1,3 +1,9 @@
+Moved:
+====================
+https://github.com/MonetaryUnit/MUE-Src
+====================
+
+
 Monetaryunit 1.0 [MUE]
 ====================
 
